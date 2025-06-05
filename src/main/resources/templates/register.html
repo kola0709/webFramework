@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <title>회원가입</title>
+    </head>
+
+    <body>
+        <h1>회원가입</h1>
+
+        <form th:action="@{/register}" th:object="${signupRequest}" method="post">
+            <label for="email">이메일 : </label>
+            <input type="email" id="email" th:field="*{email}" placeholder="이메일 입력" required />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red"></div>
+            <div th:if="${emailError}" th:text="${emailError}" style="color:red"></div>
+
+            <br/>
+
+            <label for="password">비밀번호 : </label>
+            <input type="password" id="password" th:field="*{password}" placeholder="6자 이상" required />
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></div>
+
+            <br/>
+            <button type="submit">가입하기</button>
+        </form>
+
+        <p>이미 계정이 있으신가요? <a th:href="@{/login}">로그인</a></p>
+    </body>
+</html>
